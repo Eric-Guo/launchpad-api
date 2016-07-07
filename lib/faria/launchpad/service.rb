@@ -78,18 +78,18 @@ module Faria
         get "identities/#{uuid}"
       end
 
-      def update_identity(uuid, identity_representation)
+      def update_identity(identity_representation, uuid)
         patch "identities/#{uuid}", identity: identity_representation
       end
 
       # by_value allows the unique pairing value to be used to perform
       # queries or updates instead of Launchpad's internal UUID
       def show_identity_by_pairing_value(pairing_value)
-        get "identities/by_value/#{pairing_value}"
+        get "identities/by_pairing_value/#{pairing_value}"
       end
 
       def update_identity_by_pairing_value(identity_representation, pairing_value)
-        patch "identities/by_value/#{pairing_value}", identity: identity_representation
+        patch "identities/by_pairing_value/#{pairing_value}", identity: identity_representation
       end
 
       # final provisioning step (server side)
