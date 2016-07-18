@@ -1,8 +1,8 @@
 require "faria/launchpad/api/version"
-require_relative "./packet"
-require_relative "./service"
-require_relative "./helper"
-require_relative "./controller" if defined?(ActiveSupport)
+require_relative "packet"
+require_relative "service"
+require_relative "helper"
+require_relative "controller"
 
 module Faria
   module Launchpad

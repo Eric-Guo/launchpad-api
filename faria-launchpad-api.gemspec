@@ -41,4 +41,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "jwt", "~> 1.5.4"
   spec.add_dependency "jwe", "~> 0.1.0"
   spec.add_dependency "addressable", "~> 2.4"
+  spec.add_dependency "activesupport"
 end

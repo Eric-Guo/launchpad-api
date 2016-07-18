@@ -1,3 +1,5 @@
+require 'active_support/concern'
+
 module Faria
   module Launchpad
 
@@ -6,7 +8,8 @@ module Faria
     module Controller
       extend ActiveSupport::Concern
 
-      class_methods do
+      # class_methods do
+      module ClassMethods
         def launchpad_config(config=nil)
           return @launchpad_config if config.nil?
 
