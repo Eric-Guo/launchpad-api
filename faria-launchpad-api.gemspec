@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Ruby library to interface with Faria LaunchPad.}
   spec.description   = %q{Ruby library to interface with Faria LaunchPad, including an API client and Rails helpers.}
-  spec.homepage      = "https://github.com/eduvo/launchpad_api"
+  spec.homepage      = "https://github.com/eduvo/launchpad-api"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
