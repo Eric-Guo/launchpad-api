@@ -7,7 +7,7 @@ module Faria
   module Launchpad
     module Packet
 
-      VERSION = "v0.1"
+      VERSION = "v0.2"
 
       class MismatchedRequestURL < StandardError
       end
@@ -95,7 +95,7 @@ module Faria
       end
 
       def self.add_expires(packet, expires_in)
-        packet[:exp] = (Time.now.utc + expires_in).to_i
+        packet[:exp] = Time.now.utc.to_i + expires_in
         packet
       end
 
