@@ -55,8 +55,8 @@ service = Faria::Launchpad::Service.new(
     keys: { local: local_key, remote: lp_key },
     # consumer_name: "Demo 3rd party",
     source: {
-      name: "Finalsite",
-      uri: "https://faria.finalsite.com/"
+      name: "FinalsRHere",
+      uri: "https://faria.finalsrhere.com/"
     }
   }
 )
@@ -78,8 +78,8 @@ service = Faria::Launchpad::Service.new(
     keys: { local: local_key, remote: lp_key },
     # consumer_name: "Demo 3rd party",
     source: {
-      name: "Finalsitez",
-      uri: "https://faria.finalsite.com/"
+      name: "FinalsRHere",
+      uri: "https://faria.finalsrhere.com/"
     }
   }
 )

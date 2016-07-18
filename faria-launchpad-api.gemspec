@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   # additional files to not package in the gem
-  %w(.gitignore .travis.yml).each do |file|
+  %w(.gitignore .travis.yml bin/test.rb).each do |file|
     spec.files.reject! {|f| f == file}
   end
   # puts spec.files
