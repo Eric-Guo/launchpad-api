@@ -1,4 +1,4 @@
-# faria_launchpad_api
+# faria-launchpad-api
 
 This gem will help you to integrate your Ruby (or Ruby on Rails) application with Faria's [LaunchPad](https://dev.faria.co/launchpad/) platform.
 
