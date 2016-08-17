@@ -145,9 +145,10 @@ module Faria
       def raw_request(verb, url, params = {})
         uri = full_url(url)
         a = Addressable::URI.parse(uri)
-        Net::HTTP.start(a.host, a.inferred_port) do |http|
-          http.use_ssl = a.scheme == 'https'
-          # http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http = Net::HTTP.new(a.host, a.inferred_port)
+        http.use_ssl = a.scheme == 'https'
+        # http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http.start do |http|
           request = verb_to_http_class(verb).new a.request_uri
           payload = encrypt_payload(params, a)
           if verb == :get
