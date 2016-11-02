@@ -82,6 +82,10 @@ module Faria
         patch "identities/#{uuid}", identity: identity_representation
       end
 
+      def import_identities(api_key, identities)
+        post "identities/import", {school_api_key: api_key, identities: identities}
+      end
+
       # by_value allows the unique pairing value to be used to perform
       # queries or updates instead of Launchpad's internal UUID
       def show_identity_by_pairing_value(pairing_value)
