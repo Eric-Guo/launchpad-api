@@ -6,8 +6,8 @@ require 'faria/launchpad/api/version'
 Gem::Specification.new do |spec|
   spec.name          = "faria-launchpad-api"
   spec.version       = Faria::Launchpad::Api::VERSION
-  spec.authors       = ["Josh Goebel"]
-  spec.email         = ["me@joshgoebel.com"]
+  spec.authors       = ["Faria Education Group"]
+  spec.email         = ["rubygems@fariaedu.com"]
 
   spec.summary       = %q{Ruby library to interface with Faria LaunchPad.}
   spec.description   = %q{Ruby library to interface with Faria LaunchPad, including an API client and Rails helpers.}
