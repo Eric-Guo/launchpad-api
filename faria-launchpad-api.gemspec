@@ -41,8 +41,8 @@ Gem::Specification.new do |spec|
 
   # need 1.5.4 since they have been changing the component API a lot in minor
   # point releases
-  spec.add_dependency "jwt", "~> 1.5.4"
-  spec.add_dependency "jwe", "~> 0.1.0"
+  spec.add_dependency "jwt", "1.5.6"
+  spec.add_dependency "jwe", "0.1.1"
   spec.add_dependency "addressable", "~> 2.4"
   spec.add_dependency "activesupport"
 end
