@@ -79,17 +79,17 @@ Here is a quick example. This example presumes you've already generated a 2,048 
 
 
 ```ruby
-    # fetch the LaunchPad public key 
+    # fetch the LaunchPad public key
     # (you should probably save it locally rather than constantly fetch it)
-    uri = "https://devel.launchpad.managebac.com/api/v1/"
-    launchpad_key = Net::HTTP.get_response(URI.parse(url + "pubkey")).body
+    uri = "https://launchpad.launchpad-staging.managebac.com/api/v1/"
+    launchpad_key = Net::HTTP.get_response(URI.parse(uri + "pubkey")).body
     local_key = OpenSSL::PKey::RSA.new(File.read("./secure/private_key"))
 
-    @service = Faria::Launchpad::Service.new(
-      "https://devel.launchpad.managebac.com/api/v1/",
+    service = Faria::Launchpad::Service.new(
+      "https://launchpad.launchpad-staging.managebac.com/api/v1/",
       {
         keys: { local: local_key, remote: launchpad_key },
-        # the application name and URI issued to you during your 
+        # the application name and URI issued to you during your
         # LaunchPad setup process
         source: {
           name: "Acme Widgets, LLC.",
@@ -147,12 +147,12 @@ The `SSO` module below is just one example of how you might wrap up all the piec
     class YourController < ActionController::Base
       include Faria::Launchpad::Controller
       launchpad_config SSO
-      
+
       def action
-        post_encrypted_redirect_to SSO.client.pairing_request_url, 
+        post_encrypted_redirect_to SSO.client.pairing_request_url,
           params_to_pass
       end
-      
+
     end
 ```
 
@@ -172,4 +172,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/eduvo/
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
