@@ -37,10 +37,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency "pry", "~> 0.10"
   spec.add_development_dependency "pry-byebug", "~> 3.4"
+  spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "codeclimate-test-reporter", "~> 1.0.0"
 
-
-  # need 1.5.4 since they have been changing the component API a lot in minor
-  # point releases
   spec.add_dependency "jwt", "1.5.6"
   spec.add_dependency "jwe", "0.1.1"
   spec.add_dependency "addressable", "~> 2.4"
