@@ -23,7 +23,7 @@ module Faria
         end
       end
 
-      # encrypting is done with Launchpad public key
+      # encrypting is done with LaunchPad public key
       # signing is done with local private key
 
       def self.encrypt(data, options = {}, local_key:, remote_key: )
@@ -39,8 +39,8 @@ module Faria
       end
 
       # for cases where you known in advance the remote key to use (such
-      # as Launchpad clients which will only be receiving messages from
-      # Launchpad and therefore will only use it's public key for verifying
+      # as LaunchPad clients which will only be receiving messages from
+      # LaunchPad and therefore will only use it's public key for verifying
       # signatures
       def self.decrypt(raw_data, options = {}, local_key:, remote_key: )
         version, jwe = raw_data.split(";", 2)
