@@ -87,7 +87,7 @@ module Faria
       end
 
       # by_value allows the unique pairing value to be used to perform
-      # queries or updates instead of Launchpad's internal UUID
+      # queries or updates instead of LaunchPad's internal UUID
       def show_identity_by_pairing_value(pairing_value)
         get "identities/by_pairing_value/#{pairing_value}"
       end
