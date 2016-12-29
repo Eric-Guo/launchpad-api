@@ -61,7 +61,7 @@ kQIDAQAB
 
 #### Serving your public key inside your application
 
-The LaunchPad spec also requires that your web application serve this public key (text/plaintext) over HTTPs as part of the API your application must furnish to fully support LaunchPad.
+The LaunchPad spec also requires that your web application serve this public key (text/plaintext) over HTTPS as part of the API your application must furnish to fully support LaunchPad.
 
     GET https://yourapplication.com/apis/launchpad/pubkey
     -----BEGIN PUBLIC KEY-----
@@ -80,7 +80,7 @@ Here is a quick example. This example presumes you've already generated a 2,048 
 
 ```ruby
     # fetch the LaunchPad public key
-    # (you should probably save it locally rather than constantly fetch it)
+# (you should save it locally rather than constantly fetch it)
     uri = "https://launchpad.launchpad-staging.managebac.com/api/v1/"
     launchpad_key = Net::HTTP.get_response(URI.parse(uri + "pubkey")).body
     local_key = OpenSSL::PKey::RSA.new(File.read("./secure/private_key"))
@@ -110,7 +110,7 @@ The responses returned will almost always be JSON responses (see [API documentat
 
 ### Rails Integration
 
-There is a module to extend controllers to support easily handling incoming JWE requests and a Rails helper to assist with POSTing signed redirects.   Below is a usage example.
+There is a module to extend controllers to support easily handling incoming JWE requests and a Rails helper to assist with POSTing signed redirects.  Below is a usage example.
 
 If the URL includes query parameters they will be stripped from the URL and encoded into the JWE as signed parameters.
 
