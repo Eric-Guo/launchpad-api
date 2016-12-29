@@ -5,8 +5,6 @@ module Faria
   module Launchpad
     class Service
 
-      LAUNCHPAD_NAME = "Launchpad"
-
       def self.noauth(endpoint, quiet: false)
         unless quiet
           puts "************************************************************************\n" \
