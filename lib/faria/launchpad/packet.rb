@@ -72,8 +72,6 @@ module Faria
         payload["data"]
       end
 
-      private
-
       def self.add_source(packet, source)
         packet[:faria_source] = source
         packet
