@@ -43,10 +43,10 @@ module Faria
       # LaunchPad and therefore will only use it's public key for verifying
       # signatures
       def self.decrypt(raw_data, options = {}, local_key:, remote_key: )
-        version, jwe = raw_data.split(";", 2)
+        _version, jwe = raw_data.split(";", 2)
         jwt = JWE.decrypt(jwe, local_key)
         arr = JWT.decode(jwt, remote_key, true, { :algorithm => 'RS512' })
-        payload, header = arr
+        payload, _header = arr
 
         # validate_expiration will be handled by JWT decode
         validate_url!(payload, options[:actual_url])
@@ -57,22 +57,20 @@ module Faria
       # for cases where the signature key is not known in advance and must
       # be determined by source information embedded in the JWT header
       def self.decrypt_variable_key(raw_data, options = {}, local_key:, remote_key_func: )
-        version, jwe = raw_data.split(";", 2)
+        _version, jwe = raw_data.split(";", 2)
         jwt = JWE.decrypt(jwe, local_key)
         header, payload = JWT::Decode.new(jwt, nil, false, {}).decode_segments[0..1]
         remote_key = remote_key_func.call(header, payload)
         fail(MissingRemoteKey) if remote_key.nil?
 
         arr = JWT.decode(jwt, remote_key, true, { :algorithm => 'RS512' })
-        payload, header = arr
+        payload, _header = arr
 
         # validate_expiration will be handled by JWT decode
         validate_url!(payload, options[:actual_url])
 
         payload["data"]
       end
-
-      private
 
       def self.add_source(packet, source)
         packet[:faria_source] = source
