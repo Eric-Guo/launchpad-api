@@ -2,7 +2,6 @@
 
 This gem will help you to integrate your Ruby (or Ruby on Rails) application with Faria's [LaunchPad](https://dev.faria.co/launchpad/) platform.
 
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -13,12 +12,15 @@ gem 'faria-launchpad-api'
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install faria-launchpad-api
-
+```bash
+$ gem install faria-launchpad-api
+```
 
 ## Usage
 
@@ -58,7 +60,6 @@ kQIDAQAB
 -----END PUBLIC KEY-----
 ```
 
-
 #### Serving your public key inside your application
 
 The LaunchPad spec also requires that your web application serve this public key (text/plaintext) over HTTPS as part of the API your application must furnish to fully support LaunchPad.
@@ -77,33 +78,35 @@ The LaunchPad spec also requires that your web application serve this public key
 
 Here is a quick example. This example presumes you've already generated a 2,048 bit RSA keypair and your public key has been successfully connected with LaunchPad.
 
-
 ```ruby
-    # fetch the LaunchPad public key
+require 'net/http'
+require 'faria/launchpad/api'
+
+# fetch the LaunchPad public key
 # (you should save it locally rather than constantly fetch it)
-    uri = "https://launchpad.launchpad-staging.managebac.com/api/v1/"
-    launchpad_key = Net::HTTP.get_response(URI.parse(uri + "pubkey")).body
-    local_key = OpenSSL::PKey::RSA.new(File.read("./secure/private_key"))
+uri = "https://launchpad.launchpad-staging.managebac.com/api/v1/"
+launchpad_key = Net::HTTP.get_response(URI.parse(uri + "pubkey")).body
+local_key = OpenSSL::PKey::RSA.new(File.read("./secure/private_key"))
 
-    service = Faria::Launchpad::Service.new(
-      "https://launchpad.launchpad-staging.managebac.com/api/v1/",
-      {
-        keys: { local: local_key, remote: launchpad_key },
-        # the application name and URI issued to you during your
-        # LaunchPad setup process
-        source: {
-          name: "Acme Widgets, LLC.",
-          uri: "https://app.acmewidgets.com/"
-        }
-      }
-    )
+service = Faria::Launchpad::Service.new(
+  "https://launchpad.launchpad-staging.managebac.com/api/v1/",
+  {
+    keys: { local: local_key, remote: launchpad_key },
+    # the application name and URI issued to you during your
+    # LaunchPad setup process
+    source: {
+      name: "Acme Widgets, LLC.",
+      uri: "https://app.acmewidgets.com/"
+    }
+  }
+)
 
-    # simple ping
-    puts service.ping()
-    # debugging info
-    puts service.info()
-    # echos back whatever you send
-    puts service.echo(name: "George Washington", age: 32)
+# simple ping
+puts service.ping()
+# debugging info
+puts service.info()
+# echos back whatever you send
+puts service.echo(name: "George Washington", age: 32)
 ```
 
 The responses returned will almost always be JSON responses (see [API documentation](https://dev.faria.co/launchpad/) for additional details.)
@@ -117,45 +120,44 @@ If the URL includes query parameters they will be stripped from the URL and enco
 The `SSO` module below is just one example of how you might wrap up all the pieces of a LaunchPad SSO configuration.  You might want to name this differently or pull settings from YAML, ENV, etc.  For the helpers to work you must call `launchpad_config` from your controller class and pass it an object that responds to `keys` and `source` and returns those settings.
 
 ```ruby
-    module SSO
-      def self.client
-        Faria::Launchpad::Service.new(launchpad_uri,
-          source: source,
-          keys: keys
-          )
-      end
+module SSO
+  def self.client
+    Faria::Launchpad::Service.new(launchpad_uri,
+      source: source,
+      keys: keys
+      )
+  end
 
-      def self.launchpad_uri
-        "http://launchpad.dev/api/v1/"
-      end
+  def self.launchpad_uri
+    "<http://launchpad.dev/api/v1/>"
+  end
 
-      def self.source
-        @source ||= {
-          name: "Lurn2Spell",
-          uri: "http://lurn2spell.dev/launchpad/api/"
-        }
-      end
+  def self.source
+    @source ||= {
+      name: "Lurn2Spell",
+      uri: "<http://lurn2spell.dev/launchpad/api/>"
+    }
+  end
 
-      def self.keys
-        @keys ||= {
-          local: OpenSSL::PKey::RSA.new(File.read('config/keys/local.priv')),
-          remote: OpenSSL::PKey::RSA.new(File.read('config/keys/launchpad.pub'))
-        }
-      end
-    end
+  def self.keys
+    @keys ||= {
+      local: OpenSSL::PKey::RSA.new(File.read('config/keys/local.priv')),
+      remote: OpenSSL::PKey::RSA.new(File.read('config/keys/launchpad.pub'))
+    }
+  end
+end
 
-    class YourController < ActionController::Base
-      include Faria::Launchpad::Controller
-      launchpad_config SSO
+class YourController \< ActionController::Base
+  include Faria::Launchpad::Controller
+  launchpad_config SSO
 
-      def action
-        post_encrypted_redirect_to SSO.client.pairing_request_url,
-          params_to_pass
-      end
+  def action
+    post_encrypted_redirect_to SSO.client.pairing_request_url,
+      params_to_pass
+  end
 
-    end
+end
 ```
-
 
 ## Development
 
@@ -163,11 +165,9 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
-
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/eduvo/launchpad_api.
-
+Bug reports and pull requests are welcome on GitHub at <https://github.com/eduvo/launchpad_api>.
 
 ## License
 
