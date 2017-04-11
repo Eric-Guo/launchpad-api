@@ -46,7 +46,9 @@ Generating RSA private key, 2048 bit long modulus
 ..+++
 ............................................+++
 e is 65537 (0x10001)
+```
 
+```bash
 % openssl rsa -pubout -in private_key.pem
 writing RSA key
 -----BEGIN PUBLIC KEY-----
@@ -64,15 +66,20 @@ kQIDAQAB
 
 The LaunchPad spec also requires that your web application serve this public key (text/plaintext) over HTTPS as part of the API your application must furnish to fully support LaunchPad.
 
-    GET https://yourapplication.com/apis/launchpad/pubkey
-    -----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6GUAjWeb1uyHJXhwBLtt
-    402PRlzHmMzK66b0Y+LKM789JaMO/8lOrCuoTtYkiWUpOU+7Qu6fBAMAGhCLYnOP
-    nMAftBbGN2Ppd64QYiAUTh/8pYtR36q88E7H74ngEHN/cBN8JXD4yqPo219/IyZs
-    uPIhJZgZ4DRGFanoilTYBOj8mH0hWVnFuwLrT6Qc0ibrIqyrQ4QP2NiM1CZlEO7t
-    lqJUm/bPgZdBqnQjbnfAmeyNRdsyeBhQvYhMLujdLpKQChYL64hAuj9X7ey8gZx5
-    rEaPECzlieoKcd3GL5KL+9g0vfvp8ZRyl54BgyDdS2P0p3r6xWqk/CTWjN+aAv/c
-    -----END PUBLIC KEY-----
+```bash
+GET https://yourapplication.com/apis/launchpad/pubkey
+```
+
+```bash
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6GUAjWeb1uyHJXhwBLtt
+402PRlzHmMzK66b0Y+LKM789JaMO/8lOrCuoTtYkiWUpOU+7Qu6fBAMAGhCLYnOP
+nMAftBbGN2Ppd64QYiAUTh/8pYtR36q88E7H74ngEHN/cBN8JXD4yqPo219/IyZs
+uPIhJZgZ4DRGFanoilTYBOj8mH0hWVnFuwLrT6Qc0ibrIqyrQ4QP2NiM1CZlEO7t
+lqJUm/bPgZdBqnQjbnfAmeyNRdsyeBhQvYhMLujdLpKQChYL64hAuj9X7ey8gZx5
+rEaPECzlieoKcd3GL5KL+9g0vfvp8ZRyl54BgyDdS2P0p3r6xWqk/CTWjN+aAv/c
+-----END PUBLIC KEY-----
+```
 
 ### Quick Usage Example
 
@@ -109,15 +116,15 @@ puts service.info()
 puts service.echo(name: "George Washington", age: 32)
 ```
 
-The responses returned will almost always be JSON responses (see [API documentation](https://dev.faria.co/launchpad/) for additional details.)
+The responses returned will almost always be JSON responses (see [API documentation](https://dev.faria.co/launchpad/) for details.)
 
 ### Rails Integration
 
-There is a module to extend controllers to support easily handling incoming JWE requests and a Rails helper to assist with POSTing signed redirects.  Below is a usage example.
+There is a module to extend controllers to support handling incoming JWE requests and a Rails helper to assist with POSTing signed redirects. Below is a usage example.
 
 If the URL includes query parameters they will be stripped from the URL and encoded into the JWE as signed parameters.
 
-The `SSO` module below is just one example of how you might wrap up all the pieces of a LaunchPad SSO configuration.  You might want to name this differently or pull settings from YAML, ENV, etc.  For the helpers to work you must call `launchpad_config` from your controller class and pass it an object that responds to `keys` and `source` and returns those settings.
+The `SSO` module below is just one example of how you might wrap up all the pieces of a LaunchPad SSO configuration. You might want to name this differently or pull settings from YAML, ENV, etc. For the helpers to work you must call `launchpad_config` from your controller class and pass it an object that responds to `keys` and `source` and returns those settings.
 
 ```ruby
 module SSO
